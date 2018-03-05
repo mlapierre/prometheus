@@ -15,14 +15,6 @@ rule_files:
   # - "first.rules"
   # - "second.rules"
 
-# alert
-alerting:
-  alertmanagers:
-  - scheme: http
-    static_configs:
-    - targets:
-      - "alertmanager:9093"
-
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
@@ -42,25 +34,13 @@ scrape_configs:
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
-    dns_sd_configs:
-    - names:
-      - 'tasks.cadvisor'
-      type: 'A'
-      port: 8080
-
-    # static_configs:
-    #      - targets: ['cadvisor:8080']
+    static_configs:
+         - targets: ['cadvisor:8080']
 
   - job_name: 'node-exporter'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
-    dns_sd_configs:
-    - names:
-      - 'tasks.node-exporter'
-      type: 'A'
-      port: 9100
-    
-    # static_configs:
-    #      - targets: ['node-exporter:9100']
+    static_configs:
+         - targets: ['node-exporter:9100']
